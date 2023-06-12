@@ -14,7 +14,7 @@ function grain_analyzer_window()
     #img .= GLMakie.Makie.ColorTypes.RGB(0.1,0.1,0.1)
 
     choose_title(x) = x ?  "Grain View" : "Image View"
-    load_image(x) = load(x)
+    load_image(x) = rotr90(load(x))
 
     scale = Observable(1.0)
     show_grain_view = Observable(false)
@@ -40,7 +40,7 @@ function grain_analyzer_window()
 
     title_string = lift(choose_title,show_grain_view)
     img = lift(load_image,loc)
-    ax, im = image(f[2:4, 1:6], img, axis = (aspect = DataAspect(), yreversed = true, title = title_string))
+    ax, im = image(f[2:4, 1:6], img, axis = (aspect = DataAspect(), title = title_string))
     hidedecorations!(ax)
     return f
     #display(f)
